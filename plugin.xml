@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="net.impacto.demokiosko2" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>Plugin para modo kiosko - Solo Android</name>
+    <js-module name="Plugin" src="www/Plugin.js">
+        <clobbers target="window.plugins.Plugin" />
+    </js-module>
+
+    <platform name="android">
+        <config-file parent="/*" target="res/xml/config.xml">
+            <feature name="KPlugin">
+                <param name="android-package" value="net.impacto.demokiosko2.plugin.Plugin" />
+            </feature>
+        </config-file>
+        
+         <config-file target="AndroidManifest.xml" parent="/manifest/application/activity[@android:label='@string/activity_name']">
+                <intent-filter android:label="@string/launcher_name">
+                    <category android:name="android.intent.category.DEFAULT" /><!-- Handler of app icon (required to be launcher) -->
+                    <category android:name="android.intent.category.HOME" /><!-- Handler of Home button -->
+                </intent-filter>
+        </config-file>
+
+        
+        <edit-config file="AndroidManifest.xml" target="/manifest/application/activity[@android:label='@string/activity_name']" mode="merge">
+            <intent-filter android:label="@string/launcher_name">
+                    <category android:name="android.intent.category.DEFAULT" /><!-- Handler of app icon (required to be launcher) -->
+                    <category android:name="android.intent.category.HOME" /><!-- Handler of Home button -->
+            </intent-filter>
+        </edit-config>
+        
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            
+            
+            <receiver
+            android:name="net.impacto.demokiosko2.services.BroadcastReceiverOnBootComplete"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_REPLACED" />
+                <data android:scheme="package" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name="net.impacto.demokiosko2.services.AndroidServiceStartOnBoot"></service>
+
+        <activity
+            android:name="net.impacto.demokiosko2.AppsListActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            >
+        </activity>
+        
+        <activity android:name="net.impacto.demokiosko2.MainActivity" android:keepScreenOn="true"     android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+        </activity>
+            
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/manifest">
+            <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"></uses-permission>
+            <uses-permission android:name="android.permission.REORDER_TASKS"/>
+        </config-file>
+        
+        <config-file parent="/*" target="AndroidManifest.xml"></config-file>
+        
+        <source-file src="src/android/java/net/impacto/demokiosko2/plugin/Plugin.java" target-dir="src/net/impacto/demokiosko2/plugin" />
+        <source-file src="src/android/java/net/impacto/demokiosko2/MainActivity.java" target-dir="src/net/impacto/demokiosko2/" />
+        <source-file src="src/android/java/net/impacto/demokiosko2/AppsListActivity.java" target-dir="src/net/impacto/demokiosko2/" />        
+        <source-file src="src/android/java/net/impacto/demokiosko2/models/AppDetail.java" target-dir="src/net/impacto/demokiosko2/models" />
+        <source-file src="src/android/java/net/impacto/demokiosko2/services/AndroidServiceStartOnBoot.java" target-dir="src/net/impacto/demokiosko2/services" />
+        <source-file src="src/android/java/net/impacto/demokiosko2/services/BroadcastReceiverOnBootComplete.java" target-dir="src/net/impacto/demokiosko2/services" />
+        
+        <source-file src="src/android/res/layout/activity_apps_list.xml" target-dir="res/layout"/>
+        <source-file src="src/android/res/layout/activity_main.xml" target-dir="res/layout"/>
+        <source-file src="src/android/res/layout/list_item.xml" target-dir="res/layout"/>
+
+    </platform>
+</plugin>

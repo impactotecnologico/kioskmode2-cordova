@@ -1,0 +1,19 @@
+{
+    "name": "kioskmode2-cordova",
+    "version": "1.0.0",
+    "description": "Plugin para convertir app en launcher",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/impactotecnologico/kioskmode2-cordova.git"
+    },
+    "keywords": [],
+    "author": "Impacto Tecnologico",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/impactotecnologico/kioskmode2-cordova/issues"
+    },
+    "homepage": "https://github.com/impactotecnologico/kioskmode2-cordova#readme"
+}
