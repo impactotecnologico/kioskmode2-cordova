@@ -9,6 +9,8 @@ import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
 import android.widget.Button;
+import android.content.Intent;
+import android.net.Uri;
 
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
@@ -31,8 +33,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.concurrent.ExecutionException;
+import org.apache.cordova.PluginResult;
 
-import net.impacto.demokiosko2.MainActivity;
+import net.impacto.demokiosko2.AppsListActivity;
 
 public class Plugin extends CordovaPlugin {
 
@@ -41,7 +44,7 @@ public class Plugin extends CordovaPlugin {
   private String action;
   
   private int counter = 1;
-
+  private int counterRemove = 1;
 
   public void initialize(CordovaInterface cordova, CordovaWebView webView) {
     super.initialize(cordova, webView);
@@ -53,12 +56,48 @@ public class Plugin extends CordovaPlugin {
     this.activity = cordova.getActivity();
     this.action = action;
     
-    Intent intent = new Intent(context, MainActivity.class);
-    this.cordova.getActivity().startActivity(intent);
+    System.out.println("------------>>>>>>> PLuGIN -> " + action);
     
-    System.out.println("------------>>>>>>> PLuGIN - " + action);
+    boolean result = false;
+    
+    if (action.equals("apps")){
+      this.showApps();
+    } else if (action.equals("onBackPressed")) {
+      this.onBackPressed();
+    } else {
+      callbackContext.error("\"" + action + "\" is not a recognized action.");
+      return false;
+    }
+    
+    PluginResult pluginResult = new PluginResult(PluginResult.Status.OK);
+    callbackContext.sendPluginResult(pluginResult);
+    return true;      
+    
 
-    return true;
+  }
+  
+  public void showApps(){
+      Intent i = new Intent(this.context, AppsListActivity.class);
+
+      if (this.counter == 7){
+          this.counter = 0;
+          this.cordova.getActivity().startActivity(i);
+      } else {
+          this.counter++;
+      }
+      System.out.println("---->>>>>>> showApps " + this.counter);
+  }
+  
+  public void onBackPressed() {
+      if (this.counterRemove == 7) {
+          this.counterRemove = 0;
+          Intent intent = new Intent(Intent.ACTION_DELETE);
+          intent.setData(Uri.parse("package:"+this.context.getPackageName()));
+          this.cordova.getActivity().startActivity(intent);
+      } else {
+          this.counterRemove++;
+      }
+      System.out.println("---->>>>>>> onBackPressed " + this.counterRemove);
   }
 
 }

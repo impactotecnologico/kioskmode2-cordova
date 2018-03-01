@@ -9,7 +9,7 @@
         "type": "git",
         "url": "https://github.com/impactotecnologico/kioskmode2-cordova.git"
     },
-    "keywords": [],
+    "keywords": ["kiosk","launcher","cordova","plugin","android","untouch","noexit"],
     "author": "Impacto Tecnologico",
     "license": "MIT",
     "bugs": {
