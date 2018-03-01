@@ -1,5 +1,6 @@
 # Kioskmode2 - Cordova
-by [Impacto Tecnol?gico](http://www.impactotecnologico.net)
+by [Impacto Tecnol&oacute;gico](http://www.impactotecnologico.net)
+
 |||
 |--|--|
 |Title|**KioskMode2**
@@ -16,11 +17,11 @@ This plugin defines a global `window.plugins.KPlugin` object, which provides and
 1. [Description](#1-description)
 2. [Installation](#2-installation)
 3. [Usage](#3-usage)
-4. [Demo](#-demo)
-5. [Credits](#4-credits)
-6. [License](#5-license)
+4. [Demo](#4-demo)
+5. [Credits](#5-credits)
+6. [License](#6-license)
 
-## 1. Description
+##1 Description
 A Kiosk App prevent any other applications to run in the foreground. An app with **kioskmode2-cordova** plugin disable various Android features that can be used to leave your app. The following features are affected:
 -   The home button
 -   The recent apps button
@@ -28,7 +29,7 @@ A Kiosk App prevent any other applications to run in the foreground. An app with
 **Back Button**
 This plugin doesn't implement any disable feature for the back button natively because each app is totally different, then, is possible to implement the back button restriction at final app level using a confirm dialog, two or many taps in backbutton, etc. You can check our [Demo](#-demo)
 
-## 2. Installation
+##2 Installation
 
 ### Android Platform
 This plugin edit the **android Manifest** file therefore, is necessary to have the Android platform already added. You can add this with:
@@ -44,7 +45,7 @@ $ cordova plugin add kioskmode2-cordova
 $ cordova prepare
 ```
 
-## 3. Usage
+##3 Usage
 
 This plugin is very simple to use. After installation, you can use it inside your app via `window.plugins`. A recommended wrapper for this object in **Typescript** is available in [DZone](https://dzone.com/articles/angular-2-how-do-i-get-a-reference-to-the-window-o)
 
@@ -61,13 +62,13 @@ This function is a backdoor to allow a self uninstall
 `window.plugins.KPlugin.unistall();`
 
 
-## 4. Demo
+##4 Demo
 An Ionic demo project is available here: https://github.com/impactotecnologico/kioskmode2-demo
 
-## 5. Credits
+##5 Credits
 Android and Javascript coder: [Jose Julian Ariza](https://github.com/impactotecnologico)
 
-## 6. License
+##6 License
 
 [The MIT License (MIT)](http://www.opensource.org/licenses/mit-license.html)
 
